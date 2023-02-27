@@ -25,19 +25,17 @@ export default function App() {
       <Text style={{color:'#000'}}>Open up App.js to start working on your app!</Text>
       <Text> OO </Text>
       <StatusBar style="auto" />
-      <View style = {styles.container}>
         <Text> PPP </Text>
+        <HttpExample/>
         <View style = {styles.imageContainer}>
           <ImageViewer imagePlace={background} />
         </View>
         <View style={styles.footerConter}>
           <Button label="選照片" theme="primary" onPress={pickImageAsync}/>
           <Button label="選擇！" />
-          <HttpExample/>
         </View>
         <Input/>
       </View> 
-    </View>
   );
 }
 
@@ -55,12 +53,11 @@ const styles = StyleSheet.create({
     paddingTop: 58,
   },
   image: {
-    width: 20,
-    height: 40,
+    flex:1,
     borderRadius: 18,
   },
   footerConter:{
-    flex: 1/3,
+    flex: 1,
     alignItems: 'center',
   }
 });

@@ -1,6 +1,7 @@
 
 import { Component } from 'react';
 import {View, Text, TouchableOpacity, TextInput, StyleSheet} from 'react-native'
+import Button from './Button';
 
 
 class Input extends Component{
@@ -9,6 +10,7 @@ class Input extends Component{
         score: ''
     }
     handleName = (text) => {
+        console.log('Name!?',text);
         this.setState({name:text})
     }
     handleScore = (text) => {
@@ -19,13 +21,14 @@ class Input extends Component{
          method: 'POST',
          headers: {
             Accept: 'application/json',
+            "Content-Type": "application/json",
          },
          body: JSON.stringify({
             name: this.state.name,
             score: this.state.score,
          }),
-         mode: 'no-cors'
         })
+
         .then((response) => response.json())
         .then((responseJson) => {
             console.log(responseJson);
@@ -37,12 +40,21 @@ class Input extends Component{
     render(){
         return(
             <View style = {styles.container}>
-                <TextInput style = {styles.input}
-                    underlineColorAndroid = "transparent"
-                    placeholder = "名稱"
-                    autoCapitalize='none'
-                    onChangeText={this.handleName}
-                />
+                <View style = {styles.textInputContainer}>
+                    <Text style={{flex:0.5}}>
+                        名稱：
+                    </Text>
+                    <TextInput style = {styles.input}
+                        underlineColorAndroid = "transparent"
+                        placeholder = "名稱"
+                        autoCapitalize='none'
+                        onChangeText={this.handleName}
+                    />
+                    <Button style={styles.button}>
+                        AD
+                    </Button>
+                </View>
+                
                 <TextInput style = {styles.input}
                     underlineColorAndroid = "transparent"
                     placeholder = "分數"
@@ -67,11 +79,11 @@ export default Input
 
 const styles = StyleSheet.create({
     container:{
-        paddingTop:23
+        padding:20,
+        flex:1
     },
     input:{
-        margin: 15,
-        height: 40,
+        flex:2,
         borderColor: '#7a42f4',
         borderWidth: 1
     },
@@ -81,7 +93,20 @@ const styles = StyleSheet.create({
         margin: 15,
         height: 40,
      },
+     button: {
+        backgroundColor: '#2f4',
+        padding: 10,
+        margin: 15,
+        height: 40,
+     },
      submitButtonText:{
         color: 'white'
+     },
+     textInputContainer:{
+        flexDirection: 'row',
+        flex: 0.5,
+        alignItems:'center',
+        justifyContent: 'space-between',
+        borderWidth:1,
      }
 })

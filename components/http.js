@@ -1,25 +1,23 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import { Logs } from 'expo'
+import Button from './Button'
 
 Logs.enableExpoCliLogging()
 class HttpExample extends Component {
    state = {
-      data: '333'
+      data: '333',
+      AA:'BB'
    }
    componentDidMount = () => {
       fetch('http://192.168.0.180:8080/demo/json', {
          method: 'GET',
-         headers:{
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-         }
       })
       .then(response => response.json())
-      .then(response => {
-         console.log('a',response);
+      .then(responsejson => {
+         console.log('a',responsejson);
          this.setState({
-            data: response
+            data: responsejson
          })
       })
       .catch((error) => {
@@ -27,10 +25,17 @@ class HttpExample extends Component {
       });
    }
    render() {
+    console.log('b',this.state.data);
       return (
          <View>
             <Text>
-               {this.state.data.body}
+                AA
+            </Text>
+            <Text>
+               {(this.state.data===null)?"YOYOYO":JSON.stringify(this.state.data)}
+            </Text>
+            <Text>
+                DD
             </Text>
          </View>
       )
